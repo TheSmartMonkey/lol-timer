@@ -8,36 +8,69 @@
       body {
         font-family: Arial, sans-serif;
         padding: 20px;
+        background-color: #1a1a1a;
+        color: #ffffff;
       }
-      .timer {
-        margin: 10px 0;
+      .container {
+        max-width: 300px;
+        margin: 0 auto;
       }
-      .timer input {
-        width: 100px;
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #ffffff;
+      }
+      .timer-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px;
+        border-bottom: 1px solid #333;
+      }
+      .timer-row:last-child {
+        border-bottom: none;
+      }
+      .role {
+        font-weight: bold;
+        width: 80px;
+      }
+      .timer-input {
+        background-color: #2a2a2a;
+        color: #ffffff;
+        border: 1px solid #444;
+        border-radius: 4px;
+        padding: 4px 8px;
+        text-align: center;
+        width: 70px;
+      }
+      .timer-input:disabled {
+        opacity: 1;
       }
     </style>
   </head>
   <body>
-    <h1>Cooldown Timers</h1>
-    <div id="top" class="timer">
-      <strong>Top:</strong>
-      <input type="text" id="top-timer" value="00:00" disabled />
-    </div>
-    <div id="jungle" class="timer">
-      <strong>Jungle:</strong>
-      <input type="text" id="jungle-timer" value="00:00" disabled />
-    </div>
-    <div id="mid" class="timer">
-      <strong>Mid:</strong>
-      <input type="text" id="mid-timer" value="00:00" disabled />
-    </div>
-    <div id="adc" class="timer">
-      <strong>ADC:</strong>
-      <input type="text" id="adc-timer" value="00:00" disabled />
-    </div>
-    <div id="support" class="timer">
-      <strong>Support:</strong>
-      <input type="text" id="support-timer" value="00:00" disabled />
+    <div class="container">
+      <h1>Cooldown Timers</h1>
+      <div class="timer-row">
+        <span class="role">Top</span>
+        <input type="text" id="top-timer" class="timer-input" value="00:00" disabled />
+      </div>
+      <div class="timer-row">
+        <span class="role">Jungle</span>
+        <input type="text" id="jungle-timer" class="timer-input" value="00:00" disabled />
+      </div>
+      <div class="timer-row">
+        <span class="role">Mid</span>
+        <input type="text" id="mid-timer" class="timer-input" value="00:00" disabled />
+      </div>
+      <div class="timer-row">
+        <span class="role">ADC</span>
+        <input type="text" id="adc-timer" class="timer-input" value="00:00" disabled />
+      </div>
+      <div class="timer-row">
+        <span class="role">Support</span>
+        <input type="text" id="support-timer" class="timer-input" value="00:00" disabled />
+      </div>
     </div>
     <script src="renderer.js"></script>
   </body>
