@@ -1,9 +1,7 @@
 const { ipcRenderer } = require('electron')
 
 let flashTime = 0;
-let smiteTime = 0;
 let flashInterval = null;
-let smiteInterval = null;
 
 ipcRenderer.on('set-timer', (event, timer, duration) => {
   if (timer === 'Flash') {
@@ -11,11 +9,6 @@ ipcRenderer.on('set-timer', (event, timer, duration) => {
     flashTime = duration * 60;
     updateTimer('flash-timer', flashTime);
     startTimer('flash-timer', 'flash');
-  } else if (timer === 'Smite') {
-    if (smiteInterval) clearInterval(smiteInterval);
-    smiteTime = duration * 60;
-    updateTimer('smite-timer', smiteTime);
-    startTimer('smite-timer', 'smite');
   }
 });
 
@@ -34,9 +27,6 @@ function startTimer(id, type) {
     if (type === 'flash' && flashTime > 0) {
       flashTime--;
       updateTimer(id, flashTime);
-    } else if (type === 'smite' && smiteTime > 0) {
-      smiteTime--;
-      updateTimer(id, smiteTime);
     } else {
       clearInterval(interval);
     }
@@ -44,7 +34,5 @@ function startTimer(id, type) {
 
   if (type === 'flash') {
     flashInterval = interval;
-  } else if (type === 'smite') {
-    smiteInterval = interval;
   }
 }

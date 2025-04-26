@@ -23,12 +23,9 @@ function createWindow () {
 app.whenReady().then(() => {
   createWindow()
 
-  // Register keyboard shortcuts (e.g., F1, F2)
+  // Register keyboard shortcut for Flash
   globalShortcut.register('F1', () => {
     mainWindow.webContents.send('set-timer', 'Flash', 5)
-  })
-  globalShortcut.register('F2', () => {
-    mainWindow.webContents.send('set-timer', 'Smite', 4)
   })
 })
 
