@@ -24,7 +24,7 @@ app.whenReady().then(() => {
   createWindow()
 
   // Register keyboard shortcut for Flash
-  globalShortcut.register('F1', () => {
+  globalShortcut.register('CommandOrControl+Shift+1', () => {
     mainWindow.webContents.send('set-timer', 'Flash', 5)
   })
 })
