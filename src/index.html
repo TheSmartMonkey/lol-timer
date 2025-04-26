@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>League Timer</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      .timer {
+        margin: 10px 0;
+      }
+      .timer input {
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Cooldown Timers</h1>
+    <div id="flash" class="timer">
+      <strong>Flash:</strong>
+      <input type="text" id="flash-timer" value="00:00" disabled />
+    </div>
+    <div id="smite" class="timer">
+      <strong>Smite:</strong>
+      <input type="text" id="smite-timer" value="00:00" disabled />
+    </div>
+    <script src="renderer.js"></script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "lol-timer",
+  "version": "1.0.0",
+  "description": "League of legends summoner spells timer desktop app legal in tournaments",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^35.2.1"
+  }
+}
