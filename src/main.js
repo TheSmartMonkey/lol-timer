@@ -23,9 +23,21 @@ function createWindow () {
 app.whenReady().then(() => {
   createWindow()
 
-  // Register keyboard shortcut for Flash
+  // Register keyboard shortcuts for all roles
   globalShortcut.register('CommandOrControl+Shift+1', () => {
-    mainWindow.webContents.send('set-timer', 'Flash', 5)
+    mainWindow.webContents.send('set-timer', 'top')
+  })
+  globalShortcut.register('CommandOrControl+Shift+2', () => {
+    mainWindow.webContents.send('set-timer', 'jungle')
+  })
+  globalShortcut.register('CommandOrControl+Shift+3', () => {
+    mainWindow.webContents.send('set-timer', 'mid')
+  })
+  globalShortcut.register('CommandOrControl+Shift+4', () => {
+    mainWindow.webContents.send('set-timer', 'adc')
+  })
+  globalShortcut.register('CommandOrControl+Shift+5', () => {
+    mainWindow.webContents.send('set-timer', 'support')
   })
 })
 

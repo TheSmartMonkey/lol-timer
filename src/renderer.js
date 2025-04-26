@@ -1,14 +1,19 @@
 const { ipcRenderer } = require('electron')
 
-let flashTime = 0;
-let flashInterval = null;
+const timers = {
+  top: { time: 0, interval: null },
+  jungle: { time: 0, interval: null },
+  mid: { time: 0, interval: null },
+  adc: { time: 0, interval: null },
+  support: { time: 0, interval: null }
+};
 
-ipcRenderer.on('set-timer', (event, timer, duration) => {
-  if (timer === 'Flash') {
-    if (flashInterval) clearInterval(flashInterval);
-    flashTime = duration * 60;
-    updateTimer('flash-timer', flashTime);
-    startTimer('flash-timer', 'flash');
+ipcRenderer.on('set-timer', (event, role) => {
+  if (timers[role]) {
+    if (timers[role].interval) clearInterval(timers[role].interval);
+    timers[role].time = 5 * 60; // 5 minutes
+    updateTimer(`${role}-timer`, timers[role].time);
+    startTimer(`${role}-timer`, role);
   }
 });
 
@@ -22,17 +27,15 @@ function pad(num) {
   return num < 10 ? '0' + num : num;
 }
 
-function startTimer(id, type) {
+function startTimer(id, role) {
   const interval = setInterval(() => {
-    if (type === 'flash' && flashTime > 0) {
-      flashTime--;
-      updateTimer(id, flashTime);
+    if (timers[role].time > 0) {
+      timers[role].time--;
+      updateTimer(id, timers[role].time);
     } else {
       clearInterval(interval);
     }
   }, 1000);
 
-  if (type === 'flash') {
-    flashInterval = interval;
-  }
+  timers[role].interval = interval;
 }
