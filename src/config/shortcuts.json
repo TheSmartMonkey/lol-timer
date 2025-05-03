@@ -1,0 +1,7 @@
+{
+  "top": "CommandOrControl+1",
+  "jungle": "CommandOrControl+2",
+  "mid": "CommandOrControl+P",
+  "adc": "CommandOrControl+4",
+  "support": "CommandOrControl+5"
+}

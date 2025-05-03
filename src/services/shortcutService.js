@@ -1,14 +1,17 @@
 const { globalShortcut } = require('electron');
-const { ROLES, SHORTCUTS } = require('../config/constants');
+const { ROLES } = require('../config/constants');
+const FileService = require('./fileService');
 
 class ShortcutService {
   constructor(windowService) {
     this.windowService = windowService;
     this.registeredShortcuts = new Set();
+    this.fileService = new FileService();
   }
 
   registerShortcuts() {
-    Object.entries(SHORTCUTS).forEach(([role, shortcut]) => {
+    const shortcuts = this.fileService.readShortcuts();
+    Object.entries(shortcuts).forEach(([role, shortcut]) => {
       this.registerShortcut(shortcut, () => {
         const mainWindow = this.windowService.getMainWindow();
         if (mainWindow) {
