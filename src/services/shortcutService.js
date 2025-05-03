@@ -1,12 +1,11 @@
 const { globalShortcut } = require('electron');
 const { ROLES } = require('../config/constants');
-const FileService = require('./fileService');
 
 class ShortcutService {
-  constructor(windowService) {
+  constructor(windowService, fileService) {
     this.windowService = windowService;
+    this.fileService = fileService;
     this.registeredShortcuts = new Set();
-    this.fileService = new FileService();
   }
 
   registerShortcuts() {

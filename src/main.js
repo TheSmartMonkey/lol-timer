@@ -1,9 +1,11 @@
 const { app } = require('electron')
 const WindowService = require('./services/windowService')
 const ShortcutService = require('./services/shortcutService')
+const FileService = require('./services/fileService')
 
 const windowService = new WindowService()
-const shortcutService = new ShortcutService(windowService)
+const fileService = new FileService()
+const shortcutService = new ShortcutService(windowService, fileService)
 
 app.whenReady().then(() => {
   windowService.createMainWindow()
