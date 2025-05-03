@@ -1,44 +1,13 @@
-const { app, BrowserWindow, globalShortcut } = require('electron')
-const path = require('path')
+const { app } = require('electron')
+const WindowService = require('./services/windowService')
+const ShortcutService = require('./services/shortcutService')
 
-let mainWindow
-
-function createWindow () {
-  mainWindow = new BrowserWindow({
-    width: 400,
-    height: 400,
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false
-    }
-  })
-
-  mainWindow.loadFile(path.join(__dirname, 'index.html'))
-
-  mainWindow.on('closed', () => {
-    mainWindow = null
-  })
-}
+const windowService = new WindowService()
+const shortcutService = new ShortcutService(windowService)
 
 app.whenReady().then(() => {
-  createWindow()
-
-  // Register keyboard shortcuts for all roles
-  globalShortcut.register('CommandOrControl+Shift+1', () => {
-    mainWindow.webContents.send('set-timer', 'top')
-  })
-  globalShortcut.register('CommandOrControl+Shift+2', () => {
-    mainWindow.webContents.send('set-timer', 'jungle')
-  })
-  globalShortcut.register('CommandOrControl+Shift+3', () => {
-    mainWindow.webContents.send('set-timer', 'mid')
-  })
-  globalShortcut.register('CommandOrControl+Shift+4', () => {
-    mainWindow.webContents.send('set-timer', 'adc')
-  })
-  globalShortcut.register('CommandOrControl+Shift+5', () => {
-    mainWindow.webContents.send('set-timer', 'support')
-  })
+  windowService.createMainWindow()
+  shortcutService.registerShortcuts()
 })
 
 app.on('window-all-closed', () => {
@@ -48,7 +17,10 @@ app.on('window-all-closed', () => {
 })
 
 app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow()
-  }
+  windowService.recreateMainWindow()
+})
+
+// Clean up shortcuts when the app is quitting
+app.on('will-quit', () => {
+  shortcutService.unregisterAllShortcuts()
 })
