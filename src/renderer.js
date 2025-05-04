@@ -25,11 +25,17 @@ document.getElementById('settingsButton').addEventListener('click', () => {
 // Reset button handler
 document.getElementById('resetButton').addEventListener('click', () => {
   roles.forEach((role) => {
+    // Reset the timer
     if (timerService.timers[role].interval) {
       clearInterval(timerService.timers[role].interval);
     }
     timerService.timers[role].time = 0;
-    document.getElementById(`${role}-timer`).value = '00:00';
+    const timerElement = document.getElementById(`${role}-timer`);
+    timerElement.value = '00:00';
+
+    // Reset index colors
+    timerElement.classList.remove('timer-warning', 'timer-danger');
+
     // Reset ability haste dropdowns
     document.getElementById(`${role}-ah`).value = '5';
     timerService.setAbilityHaste(role, 5);

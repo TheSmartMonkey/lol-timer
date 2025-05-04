@@ -55,6 +55,16 @@ class TimerService {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
     const formattedTime = `${this.pad(minutes)}:${this.pad(seconds)}`;
+    const timerElement = document.getElementById(`${role}-timer`);
+
+    // Update timer color based on remaining time
+    timerElement.classList.remove('timer-warning', 'timer-danger');
+    if (time <= 30) {
+      timerElement.classList.add('timer-danger');
+    } else if (time <= 60) {
+      timerElement.classList.add('timer-warning');
+    }
+
     updateCallback(`${role}-timer`, formattedTime);
   }
 
