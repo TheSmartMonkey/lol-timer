@@ -13,6 +13,7 @@
     "dist": "electron-builder"
   },
   "build": {
+    "asar": false,
     "appId": "com.loltimer.app",
     "productName": "LoL Timer",
     "directories": {
