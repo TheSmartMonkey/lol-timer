@@ -13,3 +13,15 @@ ipcRenderer.on('set-timer', (event, role) => {
 document.getElementById('settingsButton').addEventListener('click', () => {
   ipcRenderer.send('open-settings');
 });
+
+// Reset button handler
+document.getElementById('resetButton').addEventListener('click', () => {
+  const roles = ['top', 'jungle', 'mid', 'adc', 'support'];
+  roles.forEach((role) => {
+    if (timerService.timers[role].interval) {
+      clearInterval(timerService.timers[role].interval);
+    }
+    timerService.timers[role].time = 0;
+    document.getElementById(`${role}-timer`).value = '00:00';
+  });
+});
