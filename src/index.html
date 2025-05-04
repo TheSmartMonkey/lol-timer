@@ -12,7 +12,7 @@
         color: #ffffff;
       }
       .container {
-        max-width: 300px;
+        max-width: 400px;
         margin: 0 auto;
       }
       h1 {
@@ -26,6 +26,7 @@
         align-items: center;
         padding: 8px;
         border-bottom: 1px solid #333;
+        gap: 10px;
       }
       .timer-row:last-child {
         border-bottom: none;
@@ -59,6 +60,14 @@
       .settings-button:hover {
         background-color: #5a5a5a;
       }
+      .ability-haste-select {
+        background-color: #2a2a2a;
+        color: #ffffff;
+        border: 1px solid #444;
+        border-radius: 4px;
+        padding: 4px 8px;
+        width: 80px;
+      }
     </style>
   </head>
   <body>
@@ -66,22 +75,77 @@
       <h1>Cooldown Timers</h1>
       <div class="timer-row">
         <span class="role">Top</span>
+        <select id="top-ah" class="ability-haste-select">
+          <option value="0">0 AH</option>
+          <option value="10">10 AH</option>
+          <option value="20">20 AH</option>
+          <option value="30">30 AH</option>
+          <option value="40">40 AH</option>
+          <option value="50">50 AH</option>
+          <option value="60">60 AH</option>
+          <option value="80">80 AH</option>
+          <option value="100">100 AH</option>
+        </select>
         <input type="text" id="top-timer" class="timer-input" value="00:00" disabled />
       </div>
       <div class="timer-row">
         <span class="role">Jungle</span>
+        <select id="jungle-ah" class="ability-haste-select">
+          <option value="0">0 AH</option>
+          <option value="10">10 AH</option>
+          <option value="20">20 AH</option>
+          <option value="30">30 AH</option>
+          <option value="40">40 AH</option>
+          <option value="50">50 AH</option>
+          <option value="60">60 AH</option>
+          <option value="80">80 AH</option>
+          <option value="100">100 AH</option>
+        </select>
         <input type="text" id="jungle-timer" class="timer-input" value="00:00" disabled />
       </div>
       <div class="timer-row">
         <span class="role">Mid</span>
+        <select id="mid-ah" class="ability-haste-select">
+          <option value="0">0 AH</option>
+          <option value="10">10 AH</option>
+          <option value="20">20 AH</option>
+          <option value="30">30 AH</option>
+          <option value="40">40 AH</option>
+          <option value="50">50 AH</option>
+          <option value="60">60 AH</option>
+          <option value="80">80 AH</option>
+          <option value="100">100 AH</option>
+        </select>
         <input type="text" id="mid-timer" class="timer-input" value="00:00" disabled />
       </div>
       <div class="timer-row">
         <span class="role">ADC</span>
+        <select id="adc-ah" class="ability-haste-select">
+          <option value="0">0 AH</option>
+          <option value="10">10 AH</option>
+          <option value="20">20 AH</option>
+          <option value="30">30 AH</option>
+          <option value="40">40 AH</option>
+          <option value="50">50 AH</option>
+          <option value="60">60 AH</option>
+          <option value="80">80 AH</option>
+          <option value="100">100 AH</option>
+        </select>
         <input type="text" id="adc-timer" class="timer-input" value="00:00" disabled />
       </div>
       <div class="timer-row">
         <span class="role">Support</span>
+        <select id="support-ah" class="ability-haste-select">
+          <option value="0">0 AH</option>
+          <option value="10">10 AH</option>
+          <option value="20">20 AH</option>
+          <option value="30">30 AH</option>
+          <option value="40">40 AH</option>
+          <option value="50">50 AH</option>
+          <option value="60">60 AH</option>
+          <option value="80">80 AH</option>
+          <option value="100">100 AH</option>
+        </select>
         <input type="text" id="support-timer" class="timer-input" value="00:00" disabled />
       </div>
       <button id="settingsButton" class="settings-button">Shortcuts Settings</button>

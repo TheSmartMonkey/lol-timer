@@ -1,4 +1,4 @@
-const TIMER_DURATION = 5 * 60; // 5 minutes in seconds
+const TIMER_DURATION = 300;
 
 const ROLES = {
   top: 'top',

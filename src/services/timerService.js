@@ -3,12 +3,31 @@ const { TIMER_DURATION } = require('../config/constants');
 class TimerService {
   constructor() {
     this.timers = {
-      top: { time: 0, interval: null },
-      jungle: { time: 0, interval: null },
-      mid: { time: 0, interval: null },
-      adc: { time: 0, interval: null },
-      support: { time: 0, interval: null }
+      top: { time: 0, interval: null, abilityHaste: 0 },
+      jungle: { time: 0, interval: null, abilityHaste: 0 },
+      mid: { time: 0, interval: null, abilityHaste: 0 },
+      adc: { time: 0, interval: null, abilityHaste: 0 },
+      support: { time: 0, interval: null, abilityHaste: 0 },
     };
+  }
+
+  setAbilityHaste(role, value) {
+    if (this.timers[role]) {
+      this.timers[role].abilityHaste = parseInt(value);
+      if (this.timers[role].interval) {
+        const remainingTime = this.timers[role].time;
+        const baseTime = this.reverseAHCalculation(remainingTime, role);
+        this.timers[role].time = this.applyAbilityHaste(baseTime, role);
+      }
+    }
+  }
+
+  applyAbilityHaste(baseCooldown, role) {
+    return Math.round(baseCooldown / (1 + this.timers[role].abilityHaste / 100));
+  }
+
+  reverseAHCalculation(currentCooldown, role) {
+    return Math.round(currentCooldown * (1 + this.timers[role].abilityHaste / 100));
   }
 
   startTimer(role, updateCallback) {
@@ -16,10 +35,10 @@ class TimerService {
       if (this.timers[role].interval) {
         clearInterval(this.timers[role].interval);
       }
-      
-      this.timers[role].time = TIMER_DURATION;
+
+      this.timers[role].time = this.applyAbilityHaste(TIMER_DURATION, role);
       this.updateTimerDisplay(role, updateCallback);
-      
+
       this.timers[role].interval = setInterval(() => {
         if (this.timers[role].time > 0) {
           this.timers[role].time--;
@@ -44,4 +63,4 @@ class TimerService {
   }
 }
 
-module.exports = TimerService; 
+module.exports = TimerService;
