@@ -15,6 +15,16 @@ class FileService {
       return {};
     }
   }
+
+  saveShortcuts(shortcuts) {
+    try {
+      fs.writeFileSync(this.configPath, JSON.stringify(shortcuts, null, 2));
+      return true;
+    } catch (error) {
+      console.error('Error saving shortcuts:', error);
+      return false;
+    }
+  }
 }
 
-module.exports = FileService; 
+module.exports = FileService;

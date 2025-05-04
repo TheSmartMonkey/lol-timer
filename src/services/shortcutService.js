@@ -10,6 +10,10 @@ class ShortcutService {
 
   registerShortcuts() {
     const shortcuts = this.fileService.readShortcuts();
+    this.registerShortcutsFromConfig(shortcuts);
+  }
+
+  registerShortcutsFromConfig(shortcuts) {
     Object.entries(shortcuts).forEach(([role, shortcut]) => {
       this.registerShortcut(shortcut, () => {
         const mainWindow = this.windowService.getMainWindow();
@@ -20,6 +24,11 @@ class ShortcutService {
     });
   }
 
+  updateShortcuts(newShortcuts) {
+    this.unregisterAllShortcuts();
+    this.registerShortcutsFromConfig(newShortcuts);
+  }
+
   registerShortcut(shortcut, callback) {
     if (globalShortcut.register(shortcut, callback)) {
       this.registeredShortcuts.add(shortcut);
@@ -27,7 +36,7 @@ class ShortcutService {
   }
 
   unregisterAllShortcuts() {
-    this.registeredShortcuts.forEach(shortcut => {
+    this.registeredShortcuts.forEach((shortcut) => {
       globalShortcut.unregister(shortcut);
     });
     this.registeredShortcuts.clear();

@@ -46,6 +46,19 @@
       .timer-input:disabled {
         opacity: 1;
       }
+      .settings-button {
+        display: block;
+        margin: 20px auto 0;
+        background-color: #4a4a4a;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .settings-button:hover {
+        background-color: #5a5a5a;
+      }
     </style>
   </head>
   <body>
@@ -71,6 +84,7 @@
         <span class="role">Support</span>
         <input type="text" id="support-timer" class="timer-input" value="00:00" disabled />
       </div>
+      <button id="settingsButton" class="settings-button">Shortcuts Settings</button>
     </div>
     <script src="renderer.js"></script>
   </body>
