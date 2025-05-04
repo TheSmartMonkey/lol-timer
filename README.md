@@ -2,6 +2,8 @@
 
 League of Legends summoner spells timer desktop app - Tournament Legal
 
+![app-example](https://github.com/TheSmartMonkey/lol-timer/blob/main/.github/images/app-example.png)
+
 ## Description
 
 LoL Timer is a desktop application that helps League of Legends players track summoner spell cooldowns. This tool is designed to be tournament-legal as it doesn't interact with the game client and relies solely on manual input.
