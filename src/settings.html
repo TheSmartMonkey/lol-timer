@@ -23,9 +23,10 @@
       .shortcut-row {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
         padding: 12px;
         border-bottom: 1px solid #333;
+        position: relative;
       }
       .role {
         font-weight: bold;
@@ -43,6 +44,17 @@
         outline: none;
         border-color: #666;
       }
+      .shortcut-input.error {
+        border-color: #ff4444;
+      }
+      .error-message {
+        color: #ff4444;
+        font-size: 12px;
+        margin-top: 4px;
+        position: absolute;
+        right: 12px;
+        top: 40px;
+      }
       .button-container {
         text-align: center;
         margin-top: 20px;
@@ -58,6 +70,10 @@
       }
       button:hover {
         background-color: #5a5a5a;
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
       }
     </style>
   </head>

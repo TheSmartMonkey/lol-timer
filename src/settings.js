@@ -5,10 +5,14 @@ const shortcutInputs = document.querySelectorAll('.shortcut-input');
 const saveButton = document.getElementById('saveButton');
 const cancelButton = document.getElementById('cancelButton');
 
+// Store current shortcuts for validation
+let currentShortcuts = {};
+
 // Load current shortcuts
 ipcRenderer.send('get-shortcuts');
 
 ipcRenderer.on('shortcuts-data', (event, shortcuts) => {
+  currentShortcuts = shortcuts;
   Object.entries(shortcuts).forEach(([role, shortcut]) => {
     const input = document.getElementById(role);
     if (input) {
@@ -17,6 +21,39 @@ ipcRenderer.on('shortcuts-data', (event, shortcuts) => {
   });
 });
 
+// Function to check for duplicate shortcuts
+function isDuplicateShortcut(value, currentInputId) {
+  for (const [role, shortcut] of Object.entries(currentShortcuts)) {
+    if (role !== currentInputId && shortcut === value) {
+      return role;
+    }
+  }
+  return false;
+}
+
+// Function to show error message
+function showError(input, message) {
+  const existingError = input.parentElement.querySelector('.error-message');
+  if (existingError) {
+    existingError.textContent = message;
+  } else {
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.textContent = message;
+    input.parentElement.appendChild(errorDiv);
+  }
+  input.classList.add('error');
+}
+
+// Function to clear error message
+function clearError(input) {
+  const errorDiv = input.parentElement.querySelector('.error-message');
+  if (errorDiv) {
+    errorDiv.remove();
+  }
+  input.classList.remove('error');
+}
+
 // Handle key recording
 shortcutInputs.forEach((input) => {
   let keys = new Set();
@@ -24,6 +61,7 @@ shortcutInputs.forEach((input) => {
   input.addEventListener('focus', () => {
     input.value = '';
     keys.clear();
+    clearError(input);
   });
 
   input.addEventListener('keydown', (e) => {
@@ -34,6 +72,7 @@ shortcutInputs.forEach((input) => {
       input.value = '';
       keys.clear();
       input.blur();
+      clearError(input);
       return;
     }
 
@@ -53,7 +92,16 @@ shortcutInputs.forEach((input) => {
     keys.add(e.key.toUpperCase());
 
     // Update input value
-    input.value = Array.from(keys).join('+');
+    const newShortcut = Array.from(keys).join('+');
+    input.value = newShortcut;
+
+    // Check for duplicates
+    const duplicateRole = isDuplicateShortcut(newShortcut, input.id);
+    if (duplicateRole) {
+      showError(input, `This shortcut is already used for ${duplicateRole}`);
+    } else {
+      clearError(input);
+    }
   });
 
   input.addEventListener('keyup', (e) => {
@@ -66,13 +114,27 @@ shortcutInputs.forEach((input) => {
 
 // Save shortcuts
 saveButton.addEventListener('click', () => {
+  // Check for any errors before saving
+  const hasErrors = document.querySelectorAll('.error-message').length > 0;
+  if (hasErrors) {
+    return; // Don't save if there are errors
+  }
+
   const shortcuts = {};
+  let hasEmptyShortcuts = false;
+
   shortcutInputs.forEach((input) => {
-    if (input.value) {
+    if (!input.value) {
+      hasEmptyShortcuts = true;
+      showError(input, 'Shortcut cannot be empty');
+    } else {
       shortcuts[input.id] = input.value;
     }
   });
-  ipcRenderer.send('save-shortcuts', shortcuts);
+
+  if (!hasEmptyShortcuts) {
+    ipcRenderer.send('save-shortcuts', shortcuts);
+  }
 });
 
 // Cancel and close window
