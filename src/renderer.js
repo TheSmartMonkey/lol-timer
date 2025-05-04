@@ -31,7 +31,7 @@ document.getElementById('resetButton').addEventListener('click', () => {
     timerService.timers[role].time = 0;
     document.getElementById(`${role}-timer`).value = '00:00';
     // Reset ability haste dropdowns
-    document.getElementById(`${role}-ah`).value = '0';
-    timerService.setAbilityHaste(role, 0);
+    document.getElementById(`${role}-ah`).value = '5';
+    timerService.setAbilityHaste(role, 5);
   });
 });

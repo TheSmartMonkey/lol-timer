@@ -9,8 +9,8 @@ class WindowService {
 
   createMainWindow() {
     this.mainWindow = new BrowserWindow({
-      width: 350,
-      height: 450,
+      width: 500,
+      height: 550,
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
@@ -34,7 +34,7 @@ class WindowService {
 
     this.settingsWindow = new BrowserWindow({
       width: 500,
-      height: 500,
+      height: 550,
       parent: this.mainWindow,
       modal: true,
       webPreferences: {

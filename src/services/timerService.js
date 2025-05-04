@@ -3,11 +3,11 @@ const { TIMER_DURATION } = require('../config/constants');
 class TimerService {
   constructor() {
     this.timers = {
-      top: { time: 0, interval: null, abilityHaste: 0 },
-      jungle: { time: 0, interval: null, abilityHaste: 0 },
-      mid: { time: 0, interval: null, abilityHaste: 0 },
-      adc: { time: 0, interval: null, abilityHaste: 0 },
-      support: { time: 0, interval: null, abilityHaste: 0 },
+      top: { time: 0, interval: null, abilityHaste: 5 },
+      jungle: { time: 0, interval: null, abilityHaste: 5 },
+      mid: { time: 0, interval: null, abilityHaste: 5 },
+      adc: { time: 0, interval: null, abilityHaste: 5 },
+      support: { time: 0, interval: null, abilityHaste: 5 },
     };
   }
 
