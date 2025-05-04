@@ -3,11 +3,38 @@
   "name": "lol-timer",
   "version": "1.0.0",
   "description": "League of legends summoner spells timer desktop app legal in tournaments",
+  "author": {
+    "name": "Laurent Vandelle"
+  },
   "main": "src/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder build --win",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.loltimer.app",
+    "productName": "LoL Timer",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "src/assets/favicon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "installerIcon": "src/assets/favicon.ico",
+      "uninstallerIcon": "src/assets/favicon.ico",
+      "uninstallDisplayName": "LoL Timer",
+      "license": "LICENSE",
+      "createDesktopShortcut": true
+    }
   },
   "devDependencies": {
-    "electron": "^35.2.1"
+    "electron": "^35.2.1",
+    "electron-builder": "^24.9.1"
   }
 }
