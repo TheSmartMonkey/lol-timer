@@ -121,20 +121,13 @@ saveButton.addEventListener('click', () => {
   }
 
   const shortcuts = {};
-  let hasEmptyShortcuts = false;
-
   shortcutInputs.forEach((input) => {
-    if (!input.value) {
-      hasEmptyShortcuts = true;
-      showError(input, 'Shortcut cannot be empty');
-    } else {
+    if (input.value) {
       shortcuts[input.id] = input.value;
     }
   });
 
-  if (!hasEmptyShortcuts) {
-    ipcRenderer.send('save-shortcuts', shortcuts);
-  }
+  ipcRenderer.send('save-shortcuts', shortcuts);
 });
 
 // Cancel and close window

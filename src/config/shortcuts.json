@@ -2,6 +2,5 @@
   "top": "CommandOrControl+Shift+P",
   "jungle": "CommandOrControl+K",
   "mid": "CommandOrControl+Shift+K",
-  "adc": "CommandOrControl+J",
   "support": "CommandOrControl+5"
 }
